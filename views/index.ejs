@@ -1,0 +1,18 @@
+<div>
+<% for(var i=0; i< users.length; i++) {%>
+  <p>
+    <%= users[i].id %>
+    </p>
+<% } %>
+<br>
+<br>
+<br>
+<br>
+<form action="/users" method='post'>
+  First name:<br>
+  <input type="text" name="name"><br>
+  Last name:<br>
+  <input type="text" name="age">
+  <input type="submit">
+</form>
+</div>
