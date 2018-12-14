@@ -12,7 +12,8 @@ export class EditPetComponent implements OnInit {
 
   constructor(
     private _httpService: HttpService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router 
   ) { }
 
   ngOnInit() {
@@ -31,11 +32,14 @@ export class EditPetComponent implements OnInit {
   }
 
   onEdit() {
-   console.log('edit method', this.pet)
    let observable = this._httpService.editPet(this.pet);
    observable.subscribe(data => {
-   console.log('posted new pet', data)
-     this.pet= { name: "", description: "", skills: ""  }
+      this._router.navigate(['/pets', this.pet._id]);
+      this.pet= { name: "", description: "", skills: ""  }
    })
+  }
+
+  cancel(){
+    this._router.navigate(['/pets', this.pet._id]);
   }
 }

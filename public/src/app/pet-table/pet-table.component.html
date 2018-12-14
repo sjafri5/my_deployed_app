@@ -3,7 +3,7 @@
     <p>{{pet.name}}</p>
     <p>{{pet.description}}</p>
     <p>{{pet.skills}}</p>
-    <button [routerLink]="['/pets', pet._id]" [queryParams]="{pet:pet | json }">View Details</button>
+    <button [routerLink]="['/pets', pet._id]">View Details</button>
     
   </div>
 </div>

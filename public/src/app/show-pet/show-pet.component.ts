@@ -12,7 +12,8 @@ export class ShowPetComponent implements OnInit {
 
   constructor(
     private _httpService: HttpService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router 
   ) { }
 
   ngOnInit() {
@@ -25,9 +26,15 @@ export class ShowPetComponent implements OnInit {
   getPet(petId){
     let observable = this._httpService.getPet(petId);
     observable.subscribe(data => {
-     console.log('pepepepedata', data)
      this.pet = data['data']
     })
   }
 
+  delete(petId){
+    console.log('delete')
+    let observable = this._httpService.deletePet(this.pet._id);
+    observable.subscribe(data => {
+      this._router.navigate(['/']);
+    })
+  }
 }

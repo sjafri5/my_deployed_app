@@ -16,8 +16,12 @@ export class HttpService {
   }
 
   editPet(petObj){
-   console.log('editservice', petObj)
     return this._http.post('/editPet', petObj);
+  }
+
+  deletePet(petId){
+   console.log('deleteService', petId)
+   return this._http.delete('/deletePet/' + petId);
   }
 
   createPet(petObj){

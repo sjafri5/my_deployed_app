@@ -4,4 +4,5 @@
     <p>Skills: {{pet.skills}}</p>
     <p>Likes: {{pet.likes}}</p>
     <button [routerLink]="['/pets', pet._id, 'edit']">Edit</button>
+    <button (click)="delete()">Adopt</button>
 </div>
