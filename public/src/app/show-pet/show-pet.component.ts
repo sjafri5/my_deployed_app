@@ -9,6 +9,7 @@ import { ActivatedRoute, Params, Router  } from '@angular/router';
 })
 export class ShowPetComponent implements OnInit {
   public pet;
+  likeFlag;
 
   constructor(
     private _httpService: HttpService,
@@ -17,6 +18,8 @@ export class ShowPetComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.likeFlag = true
      this._route.parent.params.subscribe(params => {
       console.log('params', params)
       this.getPet(params.id)
@@ -26,6 +29,15 @@ export class ShowPetComponent implements OnInit {
   getPet(petId){
     let observable = this._httpService.getPet(petId);
     observable.subscribe(data => {
+     this.pet = data['data']
+    })
+  }
+
+  like(petId){
+   console.log('ab')
+    let observable = this._httpService.like(this.pet._id);
+    observable.subscribe(data => {
+      this.likeFlag = false
      this.pet = data['data']
     })
   }

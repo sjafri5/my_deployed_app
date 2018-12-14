@@ -71,15 +71,20 @@ app.post('/editPet', function(req, res) {
       }
     })
   });
+})
 
-
-  //Pet.findByIdAndUpdate(req.body._id, req.body, { runValidators: true  }, function(err, pet) {
-    //if(err) {
-      //res.json({message: "error", data: err})
-    //} else {
-      //res.json({message: "Success", data: pet})
-    //}
-  //})
+app.post('/like', function(req, res) {
+  console.log('LIKELIKEL', req.body);
+  Pet.findById(req.body.id, function(err, pet){
+    pet.likes += 1
+    pet.save(function (err, pet) {
+      if (err) {
+        res.json({message: "error", data: err})
+      } else {
+        res.json({message: "Success", data: pet})
+      }
+    })
+  });
 })
 
 app.get('/getPet/:id', function(req, res) {
@@ -106,7 +111,8 @@ app.post('/createPet', function(req, res) {
       req.body.skill1,
       req.body.skill2,
       req.body.skill3,
-    ]
+    ],
+    likes: 0
   });
   pet.save(function(err, data) {
     if(err) {

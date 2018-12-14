@@ -37,13 +37,12 @@ export class EditPetComponent implements OnInit {
   }
 
   onEdit() {
-   this.error = undefined
+   this.errors = undefined
    let observable = this._httpService.editPet(this.pet);
    let _this = this;
    observable.subscribe(data => {
       if(data['message'] === 'error') {
-        console.log('myerr', data.data)
-        _this.buildErrorMessages(data.data.errors)
+        _this.buildErrorMessages(data['data']['errors'])
       }
       else {
         this._router.navigate(['/pets', this.pet._id]);

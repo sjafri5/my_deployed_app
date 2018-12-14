@@ -15,6 +15,11 @@ export class HttpService {
     return this._http.get('/getPet/' + petId);
   }
 
+  like(petId){
+   console.log('abx')
+   return this._http.post('/like', {id: petId});
+  }
+
   editPet(petObj){
     return this._http.post('/editPet', petObj);
   }

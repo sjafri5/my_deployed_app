@@ -28,7 +28,7 @@ export class NewPetComponent implements OnInit {
     .subscribe(data => {
       if(data['message'] === 'error') {
         console.log('err', data)
-        _this.buildErrorMessages(data.data.errors)
+        _this.buildErrorMessages(data['data']['errors'])
       }
       else {
         this._router.navigate(['/']);
