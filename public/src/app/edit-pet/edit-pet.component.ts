@@ -8,6 +8,7 @@ import { ActivatedRoute, Params, Router  } from '@angular/router';
   styleUrls: ['./edit-pet.component.css']
 })
 export class EditPetComponent implements OnInit {
+  pet: any;
 
   constructor(
     private _httpService: HttpService,
@@ -27,5 +28,14 @@ export class EditPetComponent implements OnInit {
      console.log('data', data)
      this.pet = data['data']
     })
+  }
+
+  onEdit() {
+   console.log('edit method', this.pet)
+   let observable = this._httpService.editPet(this.pet);
+   observable.subscribe(data => {
+   console.log('posted new pet', data)
+     this.pet= { name: "", description: "", skills: ""  }
+   })
   }
 }

@@ -1,3 +1,14 @@
-<p>
-  edit-pet works!
-</p>
+<h3>
+  edit this pet
+</h3>
+
+<div *ngIf='pet'>
+  <form (submit)="onEdit()">
+    <p> {{ pet | json  }} </p>
+
+    <input placeholder='name' type="text" name="pet.name" [(ngModel)]="pet.name" /><br>
+    <input placeholder='description' type="text" name="pet.description" [(ngModel)]="pet.description" /><br>
+    <input placeholder='skills' type="text" name="pet.skills" [(ngModel)]="pet.skills" /><br>
+    <input type="submit" value="Edit" />
+  </form>
+</div>

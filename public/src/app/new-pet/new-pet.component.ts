@@ -7,7 +7,7 @@ import { HttpService  } from '../http.service';
   styleUrls: ['./new-pet.component.css']
 })
 export class NewPetComponent implements OnInit {
-  newTask: any;
+  newPet: any;
   constructor(
     private _httpService: HttpService
   ) { }
