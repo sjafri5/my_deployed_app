@@ -101,7 +101,7 @@ app.delete('/deletePet/:id', function(req, res) {
 })
 
 app.post('/createPet', function(req, res) {
-  var pet = new Pet({name: req.body.name, description: req.body.description, 
+  var pet = new Pet({name: req.body.name, type: req.body.type, description: req.body.description, 
     skills: [
       req.body.skill1,
       req.body.skill2,

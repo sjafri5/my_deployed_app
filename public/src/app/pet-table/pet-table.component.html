@@ -1,9 +1,22 @@
 <div>
-  <div *ngFor='let pet of pets' >
-    <p>{{pet.name}}</p>
-    <p>{{pet.description}}</p>
-    <p>{{pet.skills}}</p>
-    <button [routerLink]="['/pets', pet._id]">View Details</button>
-    
-  </div>
+<table>
+  <tr>
+    <td>name</td>
+    <td>type</td>
+    <td>description</td>
+    <td>skills</td>
+    <td>
+       Details
+    </td>
+  </tr>
+  <tr *ngFor='let pet of pets' >
+    <td>{{pet.name}}</td>
+    <td>{{pet.type}}</td>
+    <td>{{pet.description}}</td>
+    <td>{{pet.skills}}</td>
+    <td>
+      <button [routerLink]="['/pets', pet._id]">View Details</button>
+    </td>
+  </tr>
+</table>
 </div>

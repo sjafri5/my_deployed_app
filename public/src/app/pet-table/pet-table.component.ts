@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import sortBy from 'lodash/sortBy'
 import { HttpService  } from '../http.service';
 
 @Component({
@@ -18,10 +19,15 @@ export class PetTableComponent implements OnInit {
 
   getPets(){
     let observable = this._httpService.getPets();
+    const _this = this
     observable.subscribe(data => {
-      console.log('petssssll', data)
-      this.pets = data['data']
+      _this.organizePets(data['data'])
     })
+  }
+
+  organizePets(pets){
+  console.log('org')
+    this.pets = sortBy(pets, 'type');
   }
 
 }
