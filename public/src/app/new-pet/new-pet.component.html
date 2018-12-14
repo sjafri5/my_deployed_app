@@ -1,10 +1,14 @@
 <h4>
  Create A New Pet 
 </h4>
+<div *ngIf="errors">
+  <h6 *ngFor="let error of errors">
+    {{error}}
+  </h6>
+</div>
 <form (submit)="onSubmit()">
-  <p> {{ newPet | json  }} </p>
-
   <input placeholder='name' type="text" name="newPet.name" [(ngModel)]="newPet.name" /><br>
+  <input placeholder='type' type="text" name="newPet.type" [(ngModel)]="newPet.type" /><br>
   <input placeholder='description' type="text" name="newPet.description" [(ngModel)]="newPet.description" /><br>
   <input placeholder='skills' type="text" name="newPet.skills" [(ngModel)]="newPet.skills" /><br>
   <input type="submit" value="Add Pet" />

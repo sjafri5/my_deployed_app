@@ -61,11 +61,11 @@ app.get('/getPets', function(req, res) {
 })
 
 app.post('/editPet', function(req, res) {
-  Pet.findByIdAndUpdate(req.body._id, req.body, function(err, pet) {
+  Pet.findByIdAndUpdate(req.body._id, req.body, { runValidators: true  }, function(err, pet) {
     if(err) {
-      console.log('no petEdit', err);
+      res.json({message: "error", data: err})
     } else {
-    res.json({message: "Success", data: pet})
+      res.json({message: "Success", data: pet})
     }
   })
 })
@@ -92,8 +92,7 @@ app.post('/createPet', function(req, res) {
   var pet = new Pet({name: req.body.name, description: req.body.description, skills: req.body.skills});
   pet.save(function(err, data) {
     if(err) {
-      console.log('no petsave', err);
-
+      res.json({message: "error", data: err})
     } else {
       console.log('successfully added a petpepteptepteptep!', data);
       res.json({message: "Success", pet: data})

@@ -2,11 +2,18 @@
   edit this pet
 </h3>
 
+<div *ngIf="errors">
+  <h6 *ngFor="let error of errors">
+    {{error}}
+  </h6>
+</div>
+
 <div *ngIf='pet'>
   <form (submit)="onEdit()">
     <p> {{ pet | json  }} </p>
 
     <input placeholder='name' type="text" name="pet.name" [(ngModel)]="pet.name" /><br>
+    <input placeholder='type' type="text" name="pet.type" [(ngModel)]="pet.type" /><br>
     <input placeholder='description' type="text" name="pet.description" [(ngModel)]="pet.description" /><br>
     <input placeholder='skills' type="text" name="pet.skills" [(ngModel)]="pet.skills" /><br>
     <input type="submit" value="Edit" />

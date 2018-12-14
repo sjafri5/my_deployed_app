@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import map from 'lodash/map';
 import { HttpService } from '../http.service';
 import { ActivatedRoute, Params, Router  } from '@angular/router';
 
@@ -9,6 +10,7 @@ import { ActivatedRoute, Params, Router  } from '@angular/router';
 })
 export class EditPetComponent implements OnInit {
   pet: any;
+  errors: any;
 
   constructor(
     private _httpService: HttpService,
@@ -33,10 +35,31 @@ export class EditPetComponent implements OnInit {
 
   onEdit() {
    let observable = this._httpService.editPet(this.pet);
+   let _this = this;
    observable.subscribe(data => {
-      this._router.navigate(['/pets', this.pet._id]);
-      this.pet= { name: "", description: "", skills: ""  }
+      if(data['message'] === 'error') {
+        _this.buildErrorMessages(data.data.errors)
+      }
+      else {
+        this._router.navigate(['/pets', this.pet._id]);
+        this.pet= { name: "", description: "", skills: ""  }
+      }
    })
+  }
+
+  buildErrorMessages(errors) {
+    this.errors = map(errors, (val, key) => {
+      
+      let msg;
+      if (val.kind === 'unique'){
+        msg = key + 'value must be unique'
+      }
+      if (val.kind === 'minlength'){
+        msg = key + ': value must be at least 3 characters'
+      }
+      return msg;
+    })
+    console.log(this.errors)
   }
 
   cancel(){
