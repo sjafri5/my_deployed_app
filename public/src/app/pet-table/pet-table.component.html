@@ -3,8 +3,6 @@
   <tr>
     <td>name</td>
     <td>type</td>
-    <td>description</td>
-    <td>skills</td>
     <td>
        Details
     </td>
@@ -12,10 +10,9 @@
   <tr *ngFor='let pet of pets' >
     <td>{{pet.name}}</td>
     <td>{{pet.type}}</td>
-    <td>{{pet.description}}</td>
-    <td>{{pet.skills}}</td>
     <td>
       <button [routerLink]="['/pets', pet._id]">View Details</button>
+      <button [routerLink]="['/pets', pet._id, 'edit']">Edit</button>
     </td>
   </tr>
 </table>

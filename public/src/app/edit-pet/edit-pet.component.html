@@ -8,12 +8,23 @@
   </h6>
 </div>
 
+{{ pet | json }}
 <div *ngIf='pet'>
   <form (submit)="onEdit()">
-    <input placeholder='name' type="text" name="pet.name" [(ngModel)]="pet.name" /><br>
+    <p *ngIf="pet.name.length < 3">
+       name must be atleast 3 characters
+    </p>
+    <input placeholder='name' type="text" name="pet.name" [(ngModel)]="pet.name" />
+    <br>
+    <p *ngIf="pet.type.length < 3">
+       type must be atleast 3 characters
+    </p>
     <input placeholder='type' type="text" name="pet.type" [(ngModel)]="pet.type" /><br>
+    <p *ngIf="pet.description.length < 3">
+       type must be atleast 3 characters
+    </p>
     <input placeholder='description' type="text" name="pet.description" [(ngModel)]="pet.description" /><br>
-  <p>Skills:</p>
+  <h4>Skills:</h4>
   <input placeholder='skill1' type="text" name="pet.skill1" [(ngModel)]="pet.skill1" /><br>
   <input placeholder='skill2' type="text" name="pet.skill2" [(ngModel)]="pet.skill2" /><br>
   <input placeholder='skill3' type="text" name="pet.skill3" [(ngModel)]="pet.skill3" /><br>
