@@ -2,51 +2,67 @@ var express = require('express');
 //Create an Express App
 var app = express();
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/basic_mongoose');
+mongoose.connect('mongodb://localhost/pet_store');
 var UserSchema = new mongoose.Schema({
    name: String,
-   age: Number
-
 })
-mongoose.model('User', UserSchema);
-var User = mongoose.model('User')
 
-// Require body-parser (to receive post data from clients)
+var PetSchema = new mongoose.Schema({
+   name: String,
+   description: String,
+   skills: String,
+   likes: String,
+})
+
+
+mongoose.model('Pet', PetSchema);
+var Pet = mongoose.model('Pet')
+
+//var pet = new Pet({name: 'maya', description: 'baby baboushka', skills: 'peeing', likes: 0});
+
+
+//pet.save(function(err, data) {
+  //if(err) {
+    //console.log('mayayayayayayaya', err);
+  //} else {
+    //console.log('papayayayayayaya', data);
+  //}
+//})
+
 var bodyParser = require('body-parser');
-// Integrate body-parser with our App
 app.use(bodyParser.urlencoded({ extended: true  }));
 app.use(bodyParser.json());
-// Require path
 var path = require('path');
-// Setting our Static Folder Directory
 app.use(express.static( __dirname + '/public/dist/public'  ));
-// Setting our Views Folder Directory
 app.set('views', path.join(__dirname, './views'));
-// Setting our View Engine set to EJS
 app.set('view engine', 'ejs');
-// Routes
-// Root Request
-app.get('/users', function(req, res) {
-  console.log('bataboommmmmmmmmmmmmmmmmmmmm')
-  User.find({}, function(err, users) {
-    res.json({message: "Success", data: users})
-    //res.render('index', {users: users});
+
+
+
+
+app.get('/getPets', function(req, res) {
+  Pet.find({}, function(err, pets) {
+    res.json({message: "Success", data: pets})
   })
 })
 
 app.post('/users', function(req, res) {
   console.log('rewwqqwqwqwqwqq', req.body)
-  var user = new User({name: req.body.name, age: req.body.age});
-  user.save(function(err, data) {
-    if(err) {
-      console.log('something went wrong', err);
+  //var user = new User({name: req.body.name, age: req.body.age});
+  //user.save(function(err, data) {
+    //if(err) {
+      //console.log('something went wrong', err);
 
-    } else {
-      console.log('successfully added a user!', data);
-      res.json({message: "Success", users: data})
-    }
-  })
+    //} else {
+      //console.log('successfully added a user!', data);
+      //res.json({message: "Success", users: data})
+    //}
+  //})
 })
+app.all("*", (req,res,next) => {
+    res.sendFile(path.resolve("./public/dist/public/index.html"))
+});
+
 // Setting our Server to Listen on Port: 8000
 app.listen(8000, function() {
   console.log("listening on port 8000");

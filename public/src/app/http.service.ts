@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { HttpClient  } from '@angular/common/http';
 
 @Injectable({
@@ -7,9 +7,8 @@ import { HttpClient  } from '@angular/common/http';
 export class HttpService {
   constructor(private _http: HttpClient){}
 
-  getUsers(){
-    console.log('users')
-    return this._http.get('/users');
+  getPets(){
+    return this._http.get('/getPets');
   }
 
   postUsers(){

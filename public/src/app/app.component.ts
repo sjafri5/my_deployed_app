@@ -8,17 +8,15 @@ import { HttpService  } from './http.service';
 })
 
 export class AppComponent {
-  title = 'rapid deployment';
-  users: any;
+  title = 'ze Pet Store';
 
   constructor(private _httpService: HttpService){}
   ngOnInit(){
-    this.users = []
-    this.postUsers()
+    this.pets= []
+    this.getPets()
   }
 
   postUsers(){
-   console.log('posstt')
     let observable = this._httpService.postUsers();
     observable.subscribe(data => {
       console.log('potdata', data)
@@ -26,11 +24,11 @@ export class AppComponent {
     })
   }
 
-  getUsers(){
-    let observable = this._httpService.getUsers();
+  getPets(){
+    let observable = this._httpService.getPets();
     observable.subscribe(data => {
-      console.log('data', data)
-      this.users = data['data']
+      console.log('petssssll', data)
+      this.pets = data['data']
     })
   }
 }
