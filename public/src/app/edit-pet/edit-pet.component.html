@@ -10,12 +10,13 @@
 
 <div *ngIf='pet'>
   <form (submit)="onEdit()">
-    <p> {{ pet | json  }} </p>
-
     <input placeholder='name' type="text" name="pet.name" [(ngModel)]="pet.name" /><br>
     <input placeholder='type' type="text" name="pet.type" [(ngModel)]="pet.type" /><br>
     <input placeholder='description' type="text" name="pet.description" [(ngModel)]="pet.description" /><br>
-    <input placeholder='skills' type="text" name="pet.skills" [(ngModel)]="pet.skills" /><br>
+  <p>Skills:</p>
+  <input placeholder='skill1' type="text" name="pet.skill1" [(ngModel)]="pet.skill1" /><br>
+  <input placeholder='skill2' type="text" name="pet.skill2" [(ngModel)]="pet.skill2" /><br>
+  <input placeholder='skill3' type="text" name="pet.skill3" [(ngModel)]="pet.skill3" /><br>
     <input type="submit" value="Edit" />
   </form>
   <button (click)="cancel()">Cancel</button>

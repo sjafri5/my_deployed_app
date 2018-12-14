@@ -18,7 +18,7 @@ export class NewPetComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.newPet= { name: "", description: "", skills: ""  }
+    this.newPet= { name: "", type: "", description: "", skill1: "", skill2:"", skill3: ""  }
   }
 
   onSubmit() {
@@ -27,6 +27,7 @@ export class NewPetComponent implements OnInit {
     observable
     .subscribe(data => {
       if(data['message'] === 'error') {
+        console.log('err', data)
         _this.buildErrorMessages(data.data.errors)
       }
       else {
@@ -41,6 +42,9 @@ export class NewPetComponent implements OnInit {
       let msg;
       if (val.kind === 'unique'){
         msg = 'name: must be unique'
+      }
+      if (val.kind === 'user defined'){
+        msg = key + ': no more than three skills allowed'
       }
       if (val.kind === 'minlength'){
         msg = key + ': must be at least 3 characters'

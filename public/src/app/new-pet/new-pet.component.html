@@ -10,7 +10,10 @@
   <input placeholder='name' type="text" name="newPet.name" [(ngModel)]="newPet.name" /><br>
   <input placeholder='type' type="text" name="newPet.type" [(ngModel)]="newPet.type" /><br>
   <input placeholder='description' type="text" name="newPet.description" [(ngModel)]="newPet.description" /><br>
-  <input placeholder='skills' type="text" name="newPet.skills" [(ngModel)]="newPet.skills" /><br>
+  <p>Skills:</p>
+  <input placeholder='skill1' type="text" name="newPet.skill1" [(ngModel)]="newPet.skill1" /><br>
+  <input placeholder='skill2' type="text" name="newPet.skill2" [(ngModel)]="newPet.skill2" /><br>
+  <input placeholder='skill3' type="text" name="newPet.skill3" [(ngModel)]="newPet.skill3" /><br>
   <input type="submit" value="Add Pet" />
 </form>
 <button (click)="cancel()">Cancel</button>

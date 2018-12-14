@@ -23,12 +23,17 @@ var PetSchema = new mongoose.Schema({
     minlength: 3
   },
   skills: {
-    type: []
+    type: [],
+    validate: [arrayLimit, '{PATH} exceeds the limit of 3']
   },
   likes: {
     type: Number
   }
 })
+function arrayLimit(val) {
+  return val.length <= 3;
+}
+
 PetSchema.plugin(uniqueValidator);
 
 
@@ -43,15 +48,6 @@ app.use(express.static( __dirname + '/public/dist/public'  ));
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 
-//var pet = new Pet({name: 'foo', description:'description', skills: ['foo'], type: 'dog'});
-//pet.save(function(err, data) {
-  //if(err) {
-    //console.log('no petsave', err);
-  //} else {
-    //console.log('successfully added a petpepteptepteptep!', data);
-  //}
-//})
-
 
 
 app.get('/getPets', function(req, res) {
@@ -61,13 +57,29 @@ app.get('/getPets', function(req, res) {
 })
 
 app.post('/editPet', function(req, res) {
-  Pet.findByIdAndUpdate(req.body._id, req.body, { runValidators: true  }, function(err, pet) {
-    if(err) {
-      res.json({message: "error", data: err})
-    } else {
-      res.json({message: "Success", data: pet})
-    }
-  })
+  console.log('req', req.body);
+  Pet.findById(req.body._id, function(err, pet){
+    pet.name = req.body.name
+    pet.type= req.body.type
+    pet.description = req.body.description
+    pet.skills = [req.body.skill1, req.body.skill2, req.body.skill3]
+    pet.save(function (err, pet) {
+      if (err) {
+        res.json({message: "error", data: err})
+      } else {
+        res.json({message: "Success", data: pet})
+      }
+    })
+  });
+
+
+  //Pet.findByIdAndUpdate(req.body._id, req.body, { runValidators: true  }, function(err, pet) {
+    //if(err) {
+      //res.json({message: "error", data: err})
+    //} else {
+      //res.json({message: "Success", data: pet})
+    //}
+  //})
 })
 
 app.get('/getPet/:id', function(req, res) {
@@ -89,7 +101,13 @@ app.delete('/deletePet/:id', function(req, res) {
 })
 
 app.post('/createPet', function(req, res) {
-  var pet = new Pet({name: req.body.name, description: req.body.description, skills: req.body.skills});
+  var pet = new Pet({name: req.body.name, description: req.body.description, 
+    skills: [
+      req.body.skill1,
+      req.body.skill2,
+      req.body.skill3,
+    ]
+  });
   pet.save(function(err, data) {
     if(err) {
       res.json({message: "error", data: err})
