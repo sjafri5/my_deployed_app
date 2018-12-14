@@ -1,3 +1,7 @@
-<p>
-  show-pet works!
-</p>
+<div *ngIf='pet'>
+    <p>Name: {{pet.name}}</p>
+    <p>Description: {{pet.description}}</p>
+    <p>Skills: {{pet.skills}}</p>
+    <p>Likes: {{pet.likes}}</p>
+    <button [routerLink]="['/pets', pet._id, 'edit']">Edit</button>
+</div>

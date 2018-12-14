@@ -9,19 +9,12 @@ import { HttpService  } from './http.service';
 
 export class AppComponent {
   title = 'ze Pet Store';
+  pets: any;
 
   constructor(private _httpService: HttpService){}
   ngOnInit(){
     this.pets= []
     this.getPets()
-  }
-
-  postUsers(){
-    let observable = this._httpService.postUsers();
-    observable.subscribe(data => {
-      console.log('potdata', data)
-      this.getUsers();
-    })
   }
 
   getPets(){

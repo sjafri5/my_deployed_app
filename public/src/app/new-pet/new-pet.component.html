@@ -1,3 +1,11 @@
-<p>
-  new-pet works!
-</p>
+<h4>
+ Create A New Pet 
+</h4>
+<form (submit)="onSubmit()">
+  <p> {{ newPet | json  }} </p>
+
+  <input placeholder='name' type="text" name="newPet.name" [(ngModel)]="newPet.name" /><br>
+  <input placeholder='description' type="text" name="newPet.description" [(ngModel)]="newPet.description" /><br>
+  <input placeholder='skills' type="text" name="newPet.skills" [(ngModel)]="newPet.skills" /><br>
+  <input type="submit" value="Add Pet" />
+</form>
